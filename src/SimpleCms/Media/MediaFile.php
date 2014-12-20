@@ -2,11 +2,9 @@
 
 use SimpleCms\Core\BaseModel;
 
-class Media extends BaseModel {
+class MediaFile extends BaseModel {
 
   protected $fillable = [
-    'media_id',
-    'media_type',
     'slug',
     'meta_title',
     'meta_description',

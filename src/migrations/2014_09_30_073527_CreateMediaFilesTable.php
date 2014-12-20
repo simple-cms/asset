@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssetsTable extends Migration {
+class CreateMediaFilesTable extends Migration {
 
   /**
    * Run the migrations.
@@ -11,11 +11,9 @@ class CreateAssetsTable extends Migration {
    */
   public function up()
   {
-    Schema::create('media', function($table)
+    Schema::create('media_files', function($table)
     {
       $table->increments('id');
-      $table->integer('media_id');
-      $table->string('media_type');
       $table->string('slug', 80)->unique();
       $table->string('meta_title', 70)->unique();
       $table->string('meta_description', 155)->unique();
@@ -32,7 +30,7 @@ class CreateAssetsTable extends Migration {
    */
   public function down()
   {
-    Schema::dropIfExists('media');
+    Schema::dropIfExists('media_files');
   }
 
 }

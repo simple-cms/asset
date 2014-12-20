@@ -1,4 +1,4 @@
-<?php namespace SimpleCms\media;
+<?php namespace SimpleCms\Media;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -32,7 +32,7 @@ class MediaServiceProvider extends ServiceProvider {
 	{
     $this->app->bind('SimpleCms\Media\RepositoryInterface', function($app)
     {
-      return new EloquentRepository(new Media);
+      return new EloquentRepository(new MediaFile);
     });
 	}
 

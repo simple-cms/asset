@@ -2,9 +2,14 @@
 
 trait ModelTrait {
 
+  /**
+   * Handles our morphToMany relationship
+   *
+   * @return SimpleCms\Media\MediaFile
+   */
   public function media()
   {
-    return $this->morphMany('Media', 'media');
+    return $this->morphToMany('SimpleCms\Media\MediaFile', 'media_attachment');
   }
 
 }

@@ -1,6 +1,8 @@
 <?php
 
-Route::group(['prefix' => 'control'], function()
+Route::resource(Config::get('media::mediaURL'), 'SimpleCms\Media\PublicController');
+
+Route::group(['prefix' => Config::get('core::adminURL')], function()
 {
-  Route::resource('media', 'SimpleCms\Media\AdminController');
+  Route::resource(Config::get('media::mediaURL'), 'SimpleCms\Media\AdminController');
 });

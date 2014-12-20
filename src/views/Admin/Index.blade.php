@@ -4,12 +4,12 @@
 <aside class="right-side">
   <section class="content-header">
     <h1>
-      {{ Lang::get('asset::asset.plural') }}
+      {{ Lang::get('media::media.plural') }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> {{ Lang::get('core::core.dashboard') }}</a></li>
-      <li><a href="{{ route('control.asset.index') }}">{{ Lang::get('asset::asset.plural') }}</a></li>
-      <li class="active">{{ Lang::get('asset::asset.singular') }} {{ Lang::get('core::core.list') }}</li>
+      <li><a href="{{ route('control.media.index') }}">{{ Lang::get('media::media.plural') }}</a></li>
+      <li class="active">{{ Lang::get('media::media.singular') }} {{ Lang::get('core::core.list') }}</li>
     </ol>
   </section>
 
@@ -22,20 +22,20 @@
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs pull-right">
             <li><a href="#help" data-toggle="tab">{{ Lang::get('core::core.help') }}</a></li>
-            <li class="active"><a href="#basic" data-toggle="tab">{{ Lang::get('asset::asset.plural') }}</a></li>
-            <li class="pull-left header"><i class="fa fa-paperclip"></i> {{ Lang::get('asset::asset.singular') }} {{ Lang::get('core::core.list') }}</li>
+            <li class="active"><a href="#basic" data-toggle="tab">{{ Lang::get('media::media.plural') }}</a></li>
+            <li class="pull-left header"><i class="fa fa-paperclip"></i> {{ Lang::get('media::media.singular') }} {{ Lang::get('core::core.list') }}</li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               {{ Lang::get('core::core.actions') }} <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('control.asset.create') }}"><i class="fa fa-pencil-square-o"></i> {{ Lang::get('core::core.create') }} {{ Lang::get('asset::asset.singular') }}</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ route('control.media.create') }}"><i class="fa fa-pencil-square-o"></i> {{ Lang::get('core::core.create') }} {{ Lang::get('media::media.singular') }}</a></li>
               </ul>
             </li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="basic">
-              <table id="assets" class="table table-bordered table-striped">
+              <table id="medias" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th>{{ Lang::get('core::core.title') }}</th>
@@ -44,16 +44,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                @if(count($assets))
-                  @foreach($assets as $asset)
+                @if(count($medias))
+                  @foreach($medias as $media)
                   <tr>
-                    <td><a href="{{ route('control.asset.edit', [$asset->id]) }}">{{ $asset->title }}</a></td>
-                    <td>{{ $asset->updated_at->diffForHumans() }}</td>
+                    <td><a href="{{ route('control.media.edit', [$media->id]) }}">{{ $media->title }}</a></td>
+                    <td>{{ $media->updated_at->diffForHumans() }}</td>
                     <td>
-                    {!! Form::open(['route' => ['control.asset.destroy', $asset->id], 'method' => 'delete', 'class' => '']) !!}
+                    {!! Form::open(['route' => ['control.media.destroy', $media->id], 'method' => 'delete', 'class' => '']) !!}
                       <div class="btn-group">
-                        <a href="{{ route('control.asset.edit', [$asset->id]) }}" class="btn btn-info">{{ Lang::get('core::core.edit') }}</a>
-                        <a href="{{ route('page.show', [$asset->slug]) }}" class="btn btn-success" target="_blank">{{ Lang::get('core::core.preview') }}</a>
+                        <a href="{{ route('control.media.edit', [$media->id]) }}" class="btn btn-info">{{ Lang::get('core::core.edit') }}</a>
+                        <a href="{{ route('page.show', [$media->slug]) }}" class="btn btn-success" target="_blank">{{ Lang::get('core::core.preview') }}</a>
                         {!! Form::submit(Lang::get('core::core.destroy'), ['class' => 'btn btn-danger']) !!}
                       </div>
                     {!! Form::close() !!}
@@ -62,7 +62,7 @@
                   @endforeach
                 @else
                   <tr>
-                    <td colspan="4">{!! Lang::get('core::core.missing', ['model' => Lang::get('asset::asset.plural'), 'link' => link_to_route('control.asset.create', 'click here')]) !!}
+                    <td colspan="4">{!! Lang::get('core::core.missing', ['model' => Lang::get('media::media.plural'), 'link' => link_to_route('control.media.create', 'click here')]) !!}
                   </tr>
                 @endif
                 </tbody>
