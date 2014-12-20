@@ -1,0 +1,23 @@
+{
+    "name": "simple-cms/media",
+    "description": "",
+    "authors": [
+        {
+            "name": "Tom Green",
+            "email": "tom@beingtomgreen.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.0.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "SimpleCms\\Media\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
