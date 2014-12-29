@@ -13,10 +13,8 @@ class MediaFileService
   // Holds our Symfony\Component\Filesystem\Filesystem instance
   protected $filesystem;
 
-  // Retain original file names
-
   /**
-   * DO we want to retain original filenames
+   * Do we want to retain the original filename?
    *
    * @var bool
    */
@@ -26,24 +24,30 @@ class MediaFileService
   {
     $this->image = $image;
     $this->filesystem = $filesystem;
+
+    // Grab the various configuration values we need
     $this->retainOriginalFilename = Config::get('media::retainOriginalFilename');
     $this->newFilenameLength =Config::get('media::newFilenameLength');
   }
 
-  public function resize(UploadedFile $image)
+  public function resize(UploadedFile $image, string $type)
   {
-    // Set the name we want to use for the new image(s)
-    $newFileName = $this->generateFileName($image) . '.' . $image->guessExtension();
+    // Get the filename we want to use for the new image(s)
+    $newFileName = $this->generateFilename($image) . '.' . $image->guessExtension();
+
+    // Grab the array of images sizes we need
+    // TODO rather not have Config::get in here - Ideally a method on the model would return the array
+    $mediaConfiguration = Config::get($type .'::'. 'mediaConfiguration');
 
     // Loop through each of the image sizes
-    foreach ($this->mediaTypes[$type]['sizes'] as $size => $properties) {
+    foreach ($mediaConfiguration['sizes'] as $size => $properties) {
       // Make the image handle
       $handle = $this->image->make($image->getRealPath());
 
       // Set the directory for this media type
-      $filePath = public_path($this->mediaTypes[$type]['directory']) . DIRECTORY_SEPARATOR . $size;
+      $filePath = public_path($this->mediaConfiguration['path']);
 
-      // Check that the directory exists
+      // Check that the directory exists, if not attempt to create it
       if ($this->checkDirectoryExists($filePath, true) == false)
       {
         throw new \Exception('Directory "'. $filePath .'" does not exist, or could not be created.');
@@ -88,16 +92,7 @@ class MediaFileService
    */
   public function delete($image)
   {
-    // Loop through all possible media types
-    foreach ($this->mediaTypes as $mediaType)
-    {
-      // Loop through each of the image sizes
-      foreach ($mediaType['sizes'] as $size => $properties)
-      {
-        // Remove the file
-        $this->filesystem->remove(public_path($mediaType['directory']) . DIRECTORY_SEPARATOR . $size . DIRECTORY_SEPARATOR . $image);
-      }
-    }
+
   }
 
   /**
@@ -135,7 +130,7 @@ class MediaFileService
    */
   protected function generateFileName(UploadedFile $image)
   {
-    // Do we want to refine the original filename?
+    // Do we want to retain the original filename?
     if ($this->retainOriginalFilename == true)
     {
       // Return the original filename

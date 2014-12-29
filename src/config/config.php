@@ -1,7 +1,7 @@
 <?php
 
 return [
-  // Root Blog Post URL - example.com/<postURL>
+  // Root Media Post URL - example.com/<postURL>
   'mediaURL' => 'media',
 
   // Retain the original file name
