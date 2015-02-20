@@ -1,4 +1,4 @@
-<?php namespace SimpleCms\Media;
+<?php namespace SimpleCms\Asset;
 
 use Illuminate\Database\Eloquent\Model;
 use SimpleCms\Core\AbstractEloquentRepository;

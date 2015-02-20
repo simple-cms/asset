@@ -1,8 +1,7 @@
-<?php namespace SimpleCms\Media;
+<?php namespace SimpleCms\Asset;
 
-use SimpleCms\Media\RepositoryInterface;
+use SimpleCms\Asset\RepositoryInterface;
 use SimpleCms\Core\BaseController;
-use View;
 
 class PublicController extends BaseController {
 
@@ -36,7 +35,7 @@ class PublicController extends BaseController {
    */
   public function index()
   {
-    return View::make('media::Public/Index', [
+    return view('media::Public/Index', [
       'metaTitle' => 'Home page title',
       'metaDesciption' => 'Home page description',
       'media' => $this->media->paginate()
@@ -50,7 +49,7 @@ class PublicController extends BaseController {
    */
   public function show($slug)
   {
-    return View::make('media::Public/Show', [
+    return view('media::Public/Show', [
       'metaTitle' => 'slug page title',
       'metaDesciption' => 'slug page description',
       'media' => $this->media->getFirstBy('slug', $slug)

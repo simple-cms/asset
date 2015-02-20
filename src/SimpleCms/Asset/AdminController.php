@@ -1,7 +1,6 @@
-<?php namespace SimpleCms\Media;
+<?php namespace SimpleCms\Asset;
 
 use SimpleCms\Core\BaseController;
-use View;
 use Input;
 use Redirect;
 
@@ -10,24 +9,24 @@ class AdminController extends BaseController {
   /**
    * Store our RepositoryInterface implementation.
    *
-   * @var Simple\Media\RepositoryInterface
+   * @var Simple\Asset\RepositoryInterface
    */
-  protected $media;
+  protected $asset;
 
   /**
    * Set up the class
    *
-   * @param Simple\Media\RepositoryInterface $page
+   * @param Simple\Asset\RepositoryInterface $page
    *
    * @return void
    */
-  public function __construct(RepositoryInterface $media)
+  public function __construct(RepositoryInterface $asset)
   {
     // Call the parent constructor just in case
     parent::__construct();
 
     // Set up our Model Interface
-    $this->media = $media;
+    $this->asset = $asset;
   }
 
   /**
@@ -37,8 +36,8 @@ class AdminController extends BaseController {
    */
   public function index()
   {
-    return View::make('media::Admin/Index', [
-      'medias' => $this->media->all()
+    return view('asset::Admin/Index', [
+      'assets' => $this->asset->all()
     ]);
   }
 
@@ -49,7 +48,7 @@ class AdminController extends BaseController {
    */
   public function create()
   {
-    return View::make('media::Admin/Form');
+    return view('asset::Admin/Form');
   }
 
   /**
@@ -59,9 +58,9 @@ class AdminController extends BaseController {
    */
   public function store(CreateRequest $request)
   {
-    $media = $this->media->store($request->all());
+    $asset = $this->asset->store($request->all());
 
-    return Redirect::route('control.media.index')->with([
+    return Redirect::route('control.asset.index')->with([
       'flash-type' => 'success',
       'flash-message' => 'Successfully created '. $request->title .'!'
     ]);
@@ -74,8 +73,8 @@ class AdminController extends BaseController {
    */
   public function edit($id)
   {
-    return View::make('media::Admin/Form', [
-      'media' => $this->page->getById($id)
+    return view('asset::Admin/Form', [
+      'asset' => $this->page->getById($id)
     ]);
   }
 
@@ -86,9 +85,9 @@ class AdminController extends BaseController {
    */
   public function update(UpdateRequest $request)
   {
-    $media = $this->media->update($request->route->parameter('media'), $request->all());
+    $asset = $this->asset->update($request->route->parameter('asset'), $request->all());
 
-    return Redirect::route('control.media.index')->with([
+    return Redirect::route('control.asset.index')->with([
       'flash-type' => 'success',
       'flash-message' => 'Successfully updated '. $request->title .'!'
     ]);
@@ -101,19 +100,19 @@ class AdminController extends BaseController {
    */
   public function destroy($id)
   {
-    $media = $this->media->destroy($id);
+    $asset = $this->asset->destroy($id);
 
-    if ($media)
+    if ($asset)
     {
-      return Redirect::route('control.media.index')->with([
+      return Redirect::route('control.asset.index')->with([
         'flash-type' => 'success',
         'flash-message' => 'Page successfully deleted!'
       ]);
     }
 
-    return Redirect::route('control.media.index')->with([
+    return Redirect::route('control.asset.index')->with([
       'flash-type' => 'error',
-      'flash-message' => 'Failed to delete media!'
+      'flash-message' => 'Failed to delete asset!'
     ]);
   }
 

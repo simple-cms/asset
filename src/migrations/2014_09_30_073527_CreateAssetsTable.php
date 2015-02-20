@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMediaFilesTable extends Migration {
+class CreateAssetsTable extends Migration {
 
   /**
    * Run the migrations.
@@ -15,8 +15,8 @@ class CreateMediaFilesTable extends Migration {
     {
       $table->increments('id');
       $table->string('slug', 80)->unique();
-      $table->string('meta_title', 70)->unique();
-      $table->string('meta_description', 155)->unique();
+      $table->string('meta_title', 70);
+      $table->string('meta_description', 155);
       $table->string('title', 100);
       $table->text('excerpt');
       $table->timestamps();

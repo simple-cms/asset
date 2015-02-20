@@ -1,4 +1,4 @@
-<?php namespace SimpleCms\Media;
+<?php namespace SimpleCms\Asset;
 
 interface RepositoryInterface {
 
