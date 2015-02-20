@@ -1,5 +1,6 @@
 <?php namespace SimpleCms\Asset;
 
+use Illuminate\Http\Request;
 use SimpleCms\Asset\RepositoryInterface;
 use SimpleCms\Core\BaseController;
 
@@ -29,31 +30,20 @@ class PublicController extends BaseController {
   }
 
   /**
-   * Display the specified resource.
-   *
-   * @return Response
-   */
-  public function index()
-  {
-    return view('media::Public/Index', [
-      'metaTitle' => 'Home page title',
-      'metaDesciption' => 'Home page description',
-      'media' => $this->media->paginate()
-    ]);
-  }
-
-  /**
    * Display a listing of the resource.
    *
    * @return Response
    */
-  public function show($slug)
+  public function show($slug, Request $request)
   {
-    return view('media::Public/Show', [
-      'metaTitle' => 'slug page title',
-      'metaDesciption' => 'slug page description',
-      'media' => $this->media->getFirstBy('slug', $slug)
+    $glide = \League\Glide\ServerFactory::create([
+      'source' => public_path() .'/assets/images',
+      'cache' => storage_path() . '/framework/cache/images',
+      'max_image_size' => 2560*2000,
+      'base_url' => '/asset/',
+      'driver' => 'gd',
     ]);
-  }
 
+    $glide->outputImage($request);
+  }
 }
