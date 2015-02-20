@@ -1,5 +1,5 @@
 {
-    "name": "simple-cms/media",
+    "name": "simple-cms/asset",
     "description": "",
     "authors": [
         {
@@ -16,7 +16,7 @@
             "src/migrations"
         ],
         "psr-0": {
-            "SimpleCms\\Media\\": "src/"
+            "SimpleCms\\Asset\\": "src/"
         }
     },
     "minimum-stability": "stable"
